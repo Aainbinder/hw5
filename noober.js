@@ -16,6 +16,7 @@ function renderRides(ridesArray) {
   for (let i = 0; i < ridesArray.length; i++) {
     let ride = ridesArray[i]
 
+
     document.querySelector('.rides').insertAdjacentHTML('beforeend', `
       <h1 class="inline-block mt-8 px-4 py-2 rounded-xl text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
         <i class="fas fa-car-side"></i>
@@ -67,7 +68,81 @@ function renderRides(ridesArray) {
   }
 }
 
-window.addEventListener('DOMContentLoaded', function() {
-  // YOUR CODE
+window.addEventListener('DOMContentLoaded', async function() {
+  let allRidesButton = document.querySelector('#all-filter')
+  let poolButton = document.querySelector('#noober-pool-filter')
+  let purpleButton = document.querySelector('#noober-purple-filter')
+  let xButton = document.querySelector('#noober-x-filter')
+  let xLButton = document.querySelector('#noober-xl-filter')
+
+  let url = 'https://kiei451.com/api/rides.json' //Pulling data outside of button functions because inefficient to pull each time a button is clicked
+  let response = await fetch(url)
+  let json = await response.json()
+  let res = []
+
+  allRidesButton.addEventListener('click', async function(event){
+    event.preventDefault()
+    console.log("All Rides Selected")
+    document.querySelector('.rides').innerHTML = "";
+
+    renderRides(json)
+  })
+
+  poolButton.addEventListener('click', async function(event){
+    event.preventDefault()
+    console.log("Pool Rides Selected")
+    document.querySelector('.rides').innerHTML = "";
+
+    for(let i = 0; i < json.length; i++){
+      if(levelOfService(json[i]) == 'Noober Pool'){
+        res.push(json[i])
+      }
+    }
+    renderRides(res)
+    res = []
+  })
+
+  purpleButton.addEventListener('click', async function(event){
+    event.preventDefault()
+    console.log("Purple Rides Selected")
+    document.querySelector('.rides').innerHTML = "";
+
+    for(let i = 0; i < json.length; i++){
+      if(levelOfService(json[i]) == 'Noober Purple'){
+        res.push(json[i])
+      }
+    }
+    renderRides(res)
+    res = []
+  })
+
+  xButton.addEventListener('click', async function(event){
+    event.preventDefault()
+    console.log("Noober X Rides Selected")
+    document.querySelector('.rides').innerHTML = "";
+
+    for(let i = 0; i < json.length; i++){
+      if(levelOfService(json[i]) == 'Noober X'){
+        res.push(json[i])
+      }
+    }
+    renderRides(res)
+    res = []
+  })
+
+  xLButton.addEventListener('click', async function(event){
+    event.preventDefault()
+    console.log("Noober XL Rides Selected")
+    document.querySelector('.rides').innerHTML = "";
+
+    for(let i = 0; i < json.length; i++){
+      if(levelOfService(json[i]) == 'Noober XL'){
+        res.push(json[i])
+      }
+    }
+    renderRides(res)
+    res = []
+  })
+
 })
 
