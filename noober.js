@@ -68,6 +68,20 @@ function renderRides(ridesArray) {
   }
 }
 
+function clearButtons(){ //Removes background colors from buttons
+  let allRidesButton = document.querySelector('#all-filter')
+  let poolButton = document.querySelector('#noober-pool-filter')
+  let purpleButton = document.querySelector('#noober-purple-filter')
+  let xButton = document.querySelector('#noober-x-filter')
+  let xLButton = document.querySelector('#noober-xl-filter')
+
+  allRidesButton.classList.remove('bg-gray-300')
+  poolButton.classList.remove('bg-gray-300')
+  purpleButton.classList.remove('bg-gray-300')
+  xButton.classList.remove('bg-gray-300')
+  xLButton.classList.remove('bg-gray-300')
+}
+
 window.addEventListener('DOMContentLoaded', async function() {
   let allRidesButton = document.querySelector('#all-filter')
   let poolButton = document.querySelector('#noober-pool-filter')
@@ -84,6 +98,8 @@ window.addEventListener('DOMContentLoaded', async function() {
     event.preventDefault()
     console.log("All Rides Selected")
     document.querySelector('.rides').innerHTML = "";
+    clearButtons()
+    allRidesButton.classList.add('bg-gray-300')
 
     renderRides(json)
   })
@@ -92,6 +108,8 @@ window.addEventListener('DOMContentLoaded', async function() {
     event.preventDefault()
     console.log("Pool Rides Selected")
     document.querySelector('.rides').innerHTML = "";
+    clearButtons()
+    poolButton.classList.add('bg-gray-300')
 
     for(let i = 0; i < json.length; i++){
       if(levelOfService(json[i]) == 'Noober Pool'){
@@ -106,6 +124,8 @@ window.addEventListener('DOMContentLoaded', async function() {
     event.preventDefault()
     console.log("Purple Rides Selected")
     document.querySelector('.rides').innerHTML = "";
+    clearButtons()
+    purpleButton.classList.add('bg-gray-300')
 
     for(let i = 0; i < json.length; i++){
       if(levelOfService(json[i]) == 'Noober Purple'){
@@ -120,6 +140,8 @@ window.addEventListener('DOMContentLoaded', async function() {
     event.preventDefault()
     console.log("Noober X Rides Selected")
     document.querySelector('.rides').innerHTML = "";
+    clearButtons()
+    xButton.classList.add('bg-gray-300')
 
     for(let i = 0; i < json.length; i++){
       if(levelOfService(json[i]) == 'Noober X'){
@@ -134,6 +156,8 @@ window.addEventListener('DOMContentLoaded', async function() {
     event.preventDefault()
     console.log("Noober XL Rides Selected")
     document.querySelector('.rides').innerHTML = "";
+    clearButtons()
+    xLButton.classList.add('bg-gray-300')
 
     for(let i = 0; i < json.length; i++){
       if(levelOfService(json[i]) == 'Noober XL'){
